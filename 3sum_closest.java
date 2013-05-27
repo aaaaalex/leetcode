@@ -15,7 +15,8 @@ public class Solution {
 			}
 		}
 		//Now res is the sorted array
-		int[] res = sorting(num, max);
+		Arrays.sort(num);
+		int[] res = num;
 		int minSub = Integer.MAX_VALUE;
 		int min = 0;
 		for(int i = 0; i < res.length - 2; i++){
@@ -25,7 +26,7 @@ public class Solution {
 			while(j < k){
 				int sub = Math.abs(target - res[i] - res[j] - res[k]);
 				if(sub == 0)
-					return 0;
+					return res[i]+res[j]+res[k];
 				if(sub < minSub){
 					minSub = sub;
 					min = res[i] + res[j] + res[k];
@@ -36,34 +37,9 @@ public class Solution {
 					j++;
 			}
 		}
-		
-		
-		
-		
-		
-		
+		return min;
+
     }
 	
-	public static int[] sorting(int[] num, int range){
-		int[] a = new int[range+1];
-		//System.out.println("size => "+range);
-		for(int tmp : num){
-			int count = a[tmp];
-			count++;
-			a[tmp] = count;
-		}
-		int size = num.length;
-		int[] res  = new int[size];
-		int pcount = 0;
-		for(int i = 0; i < a.length; i++){
-			int count = a[i];
-			while(count > 0){
-				res[pcount] = i;
-				count--;
-				pcount++;
-			}
-		}
-		return res;
-	}
 	
 }
