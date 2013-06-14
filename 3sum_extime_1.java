@@ -9,7 +9,7 @@ public class Solution {
         }
         
         Arrays.sort(num);
-    	HashSet<String> resSet = new HashSet<String> ();
+    	//HashSet<String> resSet = new HashSet<String> ();
 		ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>> ();
 		Hashtable<Integer, Integer> values = new Hashtable<Integer, Integer> ();
 		
