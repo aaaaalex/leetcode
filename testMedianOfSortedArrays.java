@@ -1,6 +1,17 @@
-//This solution gets runtime error on leetcode but runs well locally.
-public class Solution {
-      public double findMedianSortedArrays(int A[], int B[]) {
+import java.util.Arrays;
+
+public class testMedianOfSortedArrays {
+	public static void main(String[] args)
+	{
+		int[] A = {2,3,4,5,6,7,8};
+		int[] B = {1};
+		
+		testMedianOfSortedArrays a = new testMedianOfSortedArrays();
+		
+		System.out.println("ANS =>" + a.findMedianSortedArrays(A, B));
+	}
+
+    public double findMedianSortedArrays(int A[], int B[]) {
         // Start typing your Java solution below
         // DO NOT write main() function
         //The idea is not just looking at the median, look at the kth number of two sorted array.
@@ -13,8 +24,10 @@ public class Solution {
 			//EVEN case
 			int target = (A.length + B.length)/2;
 			double rs1 = getMedian(A, B, target);
+			System.out.println("ANS1 => "+rs1);
 			target = target + 1;
 			double rs2 = getMedian(A, B, target);
+			System.out.println("ANS2 => "+rs2);
 			return (rs1+rs2)/2;
 		}
 		else
@@ -79,6 +92,12 @@ public class Solution {
 	
 		int pma = (A.length)/2;
 		int pmb = (target - pma - 1 - 1 >= 0 && target - pma - 1 - 1 < B.length)? (target - pma - 1 - 1) : (B.length/2);
+		//int pmb = (target - pma - 1 - 1);
+		System.out.println("target => " + target);
+		System.out.println("A.length => "+A.length);
+		System.out.println("B.length => "+B.length);
+		System.out.println("pma => "+pma);
+		System.out.println("pmb => "+pmb);
 		
 		int ma = A[pma];
 		int mb = B[pmb];
@@ -93,6 +112,7 @@ public class Solution {
 					B = new int[0];
 				else
 					B = Arrays.copyOfRange(B, pmb+1, B.length);
+				System.out.println("B.length [new] => "+B.length);
 			return getMedian(A, B, target - pmb - 1);	
 		}
 		else
