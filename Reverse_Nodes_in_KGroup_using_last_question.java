@@ -10,11 +10,61 @@
  * }
  */
 public class Solution {
-    public ListNode reverseBetween(ListNode head, int m, int n) {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        
+		if(k <= 1)
+			return head;
+		
+		ListNode tmp = head;
+		ListNode currhead = head;
+		ListNode nextPre = head;
+		int start = 1;
+		int i = 1;
+		int c = 1;
+		Solution s = new Solution();
+		
+		while(tmp != null)
+		{
+			if(c == k)
+			{
+				//ListNode ttmp = tmp;
+				tmp = tmp.next;
+				if(start == 1)
+				{
+					head = s.reverseBetween(currhead, start, i);
+				}
+				else
+				{
+					nextPre.next = s.reverseBetween(currhead, 1, c);
+				}
+				nextPre = currhead;
+				currhead = tmp;
+				c = 1;
+				i++;
+				start = i;
+			}
+			else
+			{
+				c++;
+				i++;
+				tmp = tmp.next;
+			}
+		}
+		
+		return head;
+    }
+	
+	
+	public ListNode reverseBetween(ListNode head, int m, int n) {
         // Start typing your Java solution below
         // DO NOT write main() function
         int i = 1;
 		ListNode tmp = head;
+		
+		if(head == null)
+			return null;
 		
 		if(m == n)
 			return head;
