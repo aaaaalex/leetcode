@@ -2,7 +2,10 @@ public class Solution {
     public int searchInsert(int[] A, int target) {
         // Start typing your Java solution below
         // DO NOT write main() function
-        
+		if(A == null || A.length == 0)
+			return 0;
+		
+        return solve(A, target, 0, A.length-1);
     }
 	
 	public static int solve(int[] A, int target, int s, int e)
@@ -27,7 +30,17 @@ public class Solution {
 		int mval = A[m];
 		if(mval == target)
 			return m;
-		
-		
+		if(mval > target)
+		{
+			if(m == s)
+				return s;
+			return solve(A, target, s, m-1);
+		}
+		else
+		{
+			if(m == e)
+				return e+1;
+			return solve(A, target, m+1, e);
+		}
 	}
 }
