@@ -6,8 +6,8 @@ public class Solution {
 		{
 			for(int j = 0; j<3; j++)
 			{
-				int p = (i-1)*3;
-				int pp = (j-1)*3;
+				int p = i*3;
+				int pp = j*3;
 				if(!check(3, p, pp, board))
 					return false;
 			}
@@ -30,7 +30,7 @@ public class Solution {
 				if(board[start+i][start2+j] == '.')
 					continue;
 				int ii = board[start+i][start2+j]-'0';
-				if((tmp & (1<<ii)) == 1)
+				if((tmp & (1<<ii)) > 0)
 					return false;
 				else
 					tmp = tmp ^ (1<<ii);
@@ -42,14 +42,14 @@ public class Solution {
 			tmp = 0;
 			for(int j = 0; j < len; j++)
 			{
-				if(len == 9)
+				//if(len == 9)
 					tmp = 0;
 				for(int i = 0; i < len; i++)
 				{
 					if(board[start+i][start2+j] == '.')
 						continue;
 					int ii = board[start+i][start2+j]-'0';
-					if((tmp & (1<<ii)) == 1)
+					if((tmp & (1<<ii)) > 0)
 						return false;
 					else
 						tmp = tmp ^ (1<<ii);
