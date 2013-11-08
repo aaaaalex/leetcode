@@ -1,33 +1,33 @@
 public class Solution {
     public boolean wordBreak(String s, Set<String> dict) {
         // Note: The Solution object is instantiated only once and is reused by each test case.
-		boolean[s.length()] isMat = new boolean[s.length()];
-		boolean[s.length()] isVis = new boolean[s.length()];
 		
+		// boolean[][] isVis = new boolean[s.length()][s.length()];
+		int[][] f = new int[s.length()][s.length()];
 		
+		return check(s, dict, 0, s.length()-1, f);
     }
 	
-	public boolean check(String s, Set<String> dict, boolean[] isMat, boolean[] isVis, int c)
+	public boolean check(String s, Set<String> dict, int i, int j, int[][] f)
 	{
-		if(c >= s.length())
-			return true;
-		isVis[c] = true;
-		for(int i = c; i < s.length(); i++)
+		if(f[i][j] == 1) return true;
+		if(f[i][j] == -1) return false;
+		String s0 = s.substring(i, j+1);
+		if(dict.contains(s0))
 		{
-			String tmp = s.substring(c, i);
-			if(dict.contains(tmp))
+			f[i][j] = 1;
+			return true;
+		}
+		for(int k = i+1; k <= j; k++)
+		{
+			if(check(s, dict, i, k-1, f)&&check(s, dict, k, j, f))
 			{
-				if(i == s.length()-1)
-					return true;
-				if(isVis[i+1])
-				{
-					if(isMat[i+1])
-					{
-						isMat[c] = true;
-						return true;
-					}
-				}
+				f[i][j] = 1;
+				return true;
 			}
 		}
+		
+		f[i][j] = -1;
+		return false;
 	}
 }
