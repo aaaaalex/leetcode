@@ -44,9 +44,17 @@ public class Solution {
 			{
 				if(!firstStar)
 				{
-					if(!checkEqual(s.substring(0, p.length()-1), tmp))
+					if(!checkEqual(s.substring(0, tmp.length()), tmp))
 						return false;
-					c = tmp.length()-1;
+					c = tmp.length();
+					if(c >= s.length() && i == (pp.size()-1))
+						return true;
+					if(i == pp.size()-1)
+					{
+						if(lastStar)
+							return true;
+						return false;
+					}
 					continue;
 				}
 			}
@@ -70,11 +78,12 @@ public class Solution {
 				return false;
 			}
 
-			int tmpc = find(s.substring(c, s.length()), tmp, c);
+			int tmpc = find(s, tmp, c);
 			if(tmpc < 0)
 				return false;
 			c = tmpc;
 		}
+		
 		return false;
 	}
 	
@@ -87,11 +96,11 @@ public class Solution {
 
 		for(int i = c; i < s.length(); i++)
 		{
-			if(s.charAt(i) == p.charAt(0))
+			if(s.charAt(i) == p.charAt(0) || p.charAt(0) == '?')
 			{
 				if(s.length()-i < p.length())
-					continue;
-				if(checkEqual(s.substring(i, i+p.length()-1), p))
+					return -1;
+				if(checkEqual(s.substring(i, i+p.length()), p))
 					return (i+p.length());
 			}
 		}
